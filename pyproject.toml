@@ -1,0 +1,12 @@
+[project]
+name = "ant-connect-streamlit-demo"
+version = "0.1.0"
+description = "Demo Streamlit app showcasing ant-connect-streamlit inside ANT-OS"
+requires-python = ">=3.11"
+dependencies = [
+    "streamlit>=1.30.0",
+    "ant-connect-streamlit",
+]
+
+[tool.uv.sources]
+ant-connect-streamlit = { git = "https://github.com/ANTCDE/ANT-OS.git", subdirectory = "packages/ant-connect-streamlit" }

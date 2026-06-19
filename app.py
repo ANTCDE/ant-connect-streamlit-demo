@@ -141,6 +141,43 @@ def main() -> None:
     elif st.session_state.get("_req_result"):
         st.json(st.session_state["_req_result"])
 
+    st.divider()
+    st.subheader(":satellite: Real-Time Observer")
+
+    if project:
+        if "observer_key" not in st.session_state:
+            st.session_state.observer_key = ant.observe("task")
+            st.session_state.event_log = []
+
+        for event in ant.events("task"):
+            st.session_state.event_log.insert(0, event)
+            st.session_state.event_log = st.session_state.event_log[:20]
+
+        col_clear, col_stop = st.columns(2)
+        with col_clear:
+            if st.button(":wastebasket: Clear log", key="clear_events", use_container_width=True):
+                st.session_state.event_log = []
+        with col_stop:
+            if st.button(":stop_sign: Stop observing", key="stop_obs", use_container_width=True):
+                key = st.session_state.pop("observer_key", None)
+                if key:
+                    ant.unobserve(key)
+                    st.success("Observer stopped")
+
+        if st.session_state.get("event_log"):
+            for ev in st.session_state.event_log:
+                task_data = ev.get("task", ev)
+                action = task_data.get("action", "?")
+                tid = task_data.get("id", "?")
+                title = task_data.get("data", {}).get("title", "") if isinstance(task_data.get("data"), dict) else ""
+                st.write(f"**{action}** task `{tid}`" + (f" — _{title}_" if title else ""))
+                with st.expander("Raw signal data"):
+                    st.json(ev)
+        else:
+            st.info("Listening for task changes... Edit a task in another tab to see events here.")
+    else:
+        st.warning("Select a project to start observing task changes")
+
     st.caption("Use the sidebar and controls to interact with ANT-OS host features.")
 
 

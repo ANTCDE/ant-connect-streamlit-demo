@@ -9,4 +9,4 @@ dependencies = [
 ]
 
 [tool.uv.sources]
-ant-connect-streamlit = { git = "https://github.com/ANTCDE/ANT-OS.git", subdirectory = "packages/ant-connect-streamlit" }
+ant-connect-streamlit = { path = "../ant-connect-streamlit", editable = true }

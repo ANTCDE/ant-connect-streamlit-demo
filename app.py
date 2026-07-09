@@ -2,11 +2,34 @@
 
 from __future__ import annotations
 
+import json
+import subprocess
+from importlib.metadata import distribution
+from pathlib import Path
+
 import streamlit as st
 
 import ant_connect_streamlit as ant_connect
 
 st.set_page_config(page_title="ANT Streamlit Demo", page_icon=":link:", layout="wide")
+
+
+@st.cache_resource
+def version_badge() -> str:
+    try:
+        demo = subprocess.check_output(
+            ["git", "rev-parse", "--short", "HEAD"],
+            cwd=Path(__file__).parent,
+            text=True,
+        ).strip()
+    except Exception:
+        demo = "unknown"
+    try:
+        raw = distribution("ant-connect-streamlit").read_text("direct_url.json")
+        lib = json.loads(raw)["vcs_info"]["commit_id"][:7] if raw else "local"
+    except Exception:
+        lib = "local"
+    return f"demo `{demo}` · lib `{lib}`"
 
 
 def navigate_widget(ant: ant_connect.AntConnect) -> None:
@@ -45,6 +68,8 @@ def navigate_widget(ant: ant_connect.AntConnect) -> None:
 
 
 def main() -> None:
+    st.sidebar.caption(version_badge())
+
     ant = ant_connect.connect()
     ctx = ant.context
 

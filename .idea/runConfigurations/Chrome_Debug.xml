@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Run Streamlit" type="ShConfigurationType">
-    <option name="SCRIPT_TEXT" value="$PROJECT_DIR$/.venv/bin/streamlit run app.py" />
+  <configuration default="false" name="Chrome Debug" type="ShConfigurationType">
+    <option name="SCRIPT_TEXT" value="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --disable-web-security --disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults --user-data-dir=$PROJECT_DIR$/.chrome-debug-profile 'https://os.antcde.io/developer?licenseId=6ec3778c-fa82-11ef-8b9c-061d076d6703'" />
     <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
     <option name="SCRIPT_PATH" value="" />
     <option name="SCRIPT_OPTIONS" value="" />

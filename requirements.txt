@@ -1,2 +1,2 @@
 streamlit>=1.30.0
-ant-connect-streamlit @ git+https://github.com/ANTCDE/ant-connect-streamlit.git@5cae73c5d181ab6059c6a70822952dd7425fa668
+ant-connect-streamlit>=0.1.0

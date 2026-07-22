@@ -5,8 +5,5 @@ description = "Demo Streamlit app showcasing ant-connect-streamlit inside ANT-OS
 requires-python = ">=3.11"
 dependencies = [
     "streamlit>=1.30.0",
-    "ant-connect-streamlit",
+    "ant-connect-streamlit>=0.1.0",
 ]
-
-[tool.uv.sources]
-ant-connect-streamlit = { git = "https://github.com/ANTCDE/ant-connect-streamlit.git" }
